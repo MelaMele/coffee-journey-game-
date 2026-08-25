@@ -1,5 +1,6 @@
 import pgzrun
 import random
+import asyncio
 
 # የስክሪን ስፋት እና ቁመት
 WIDTH = 800
@@ -10,7 +11,7 @@ TITLE = "የቡና ጉዞ፡ ከካፋ እስከ ዓለም - ደረጃ 1"
 
 # ገጸ-ባህሪያት (Actors)
 kaldi = Actor('kaldi')
-kaldi.pos = (100, 500)  # የካልዲ መነሻ ቦታ
+kaldi.pos = (100, 500)
 
 coffee = Actor('coffee')
 coffee.pos = (random.randint(100, 700), random.randint(100, 500))
@@ -58,12 +59,18 @@ def update():
     # ካልዲ የቡና ፍሬውን ሲነካው
     if kaldi.colliderect(coffee):
         score += 1
-        # የቡና ፍሬውን ወደ አዲስ ቦታ መቀየር
         coffee.pos = (random.randint(100, 700), random.randint(100, 500))
         
     # 10 ቡና ሲሰበስብ ጨዋታው ያበቃል
     if score >= 10:
         game_over = True
 
-# ጨዋታውን ማስነሻ
-pgzrun.go()
+# ለWeb (Pygbag) እና ለLocal ማስነሻ የሚያገለግል Async Main loop
+async def main():
+    while True:
+        update()
+        draw()
+        await asyncio.sleep(0)
+
+# በዌብ ላይ ሲሆን የሚሰራው
+asyncio.run(main())
