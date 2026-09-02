@@ -10,7 +10,7 @@ HEIGHT = 600
 # የጨዋታው ርዕስ
 TITLE = "የቡና ጉዞ፡ ከካፋ እስከ ዓለም - ደረጃ 4 (ዓለም አቀፍ ኤክስፖርት)"
 
-# ገጸ-ባህሪያት (Actors)
+# ገጸ-ባህሪያት (የፋይል ቅጥያ ሳይጨምሩ)
 kaldi = Actor('kaldi')
 kaldi.pos = (100, 500)
 
@@ -31,10 +31,10 @@ obstacle2.pos = (500, 400)
 obs2_speed = -5
 
 # የጨዋታ ሁኔታዎች
-has_coffee = False  # ካልዲ ቡና ጭኗል ወይ?
-export_score = 0     # የኤክስፖርት ነጥብ
+has_coffee = False
+export_score = 0
 lives = 3
-timer = 90           # 90 ሰከንድ
+timer = 90
 start_time = time.time()
 
 game_over = False
@@ -127,7 +127,7 @@ def update():
     # 6. ከመሰናክል ጋር መጋጨት
     if kaldi.colliderect(obstacle1) or kaldi.colliderect(obstacle2):
         lives -= 1
-        has_coffee = False  # የጫነው ቡና ይወድቃል
+        has_coffee = False
         kaldi.pos = (100, 500)
         if lives <= 0:
             game_over = True
